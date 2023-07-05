@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import com.study.command.BoardInfoHandler;
 import com.study.command.BoardListHandler;
 import com.study.command.CommandHandler;
 
@@ -41,6 +42,8 @@ public class BoardController extends HttpServlet {
 
         if (command.equals("list")) {
             handler = new BoardListHandler();
+        } else if (command.equals("get")) {
+            handler = new BoardInfoHandler();
         }
 
         if (handler == null) {

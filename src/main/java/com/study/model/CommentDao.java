@@ -41,9 +41,9 @@ public class CommentDao {
                 CommentBean commentBean = new CommentBean();
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-
+                
                 commentBean.setCommentId(rs.getLong("commentId"));
-                commentBean.setContent(rs.getString("contentId"));
+                commentBean.setContent(rs.getString("content"));
                 commentBean.setCreatedAt(dateFormat.format(rs.getTimestamp("createdAt")));
                 commentBean.setBoardId(rs.getLong("boardId"));
 

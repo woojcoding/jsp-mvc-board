@@ -1,5 +1,6 @@
-package com.study.model;
+package com.study.service;
 
+import com.study.model.CategoryBean;
 import com.study.util.ConnectionUtil;
 
 import java.sql.Connection;
