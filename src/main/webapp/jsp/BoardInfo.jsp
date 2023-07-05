@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
   <link rel="stylesheet" href="/css/board-info.css" type="text/css">
@@ -41,7 +41,7 @@
         </td>
       </tr>
     </c:forEach>
-    <form action="CommentWriteProc.jsp?boardId=${boardBean.boardId}" method="post">
+    <form action="board/comment?cmd=write&boardId=${boardBean.boardId}" method="post">
     <tr class="commentEnd">
       <td colspan="3"><textarea rows="2" cols="250" name="comment" placeholder="댓글을 입력해주세요."></textarea></td>
       <td><button type="submit">등록</button> </td>
@@ -49,7 +49,7 @@
     </form>
     <tr>
       <td class="buttons" colspan="4">
-        <button onclick="location.href='BoardList.jsp'">목록</button>
+        <button onclick="location.href='board?cmd=list'">목록</button>
         <button onclick="location.href='BoardUpdateForm.jsp?boardId='${boardBean.boardId}">수정</button>
         <button onclick="location.href='PasswordValidate.jsp?boardId=${boardBean.boardId}'">삭제</button>
       </td>
