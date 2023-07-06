@@ -11,7 +11,10 @@
     <title>게시판-등록</title>
 </head>
 <body>
+
 <script>
+    history.replaceState({}, null, location.pathname);
+
     function validateForm() {
         var category = document.forms["myForm"]["categoryId"].value;
 

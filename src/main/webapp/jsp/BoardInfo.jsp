@@ -6,6 +6,10 @@
   <title>게시판 보기</title>
 </head>
 <body>
+<script type="text/javascript">
+  // url 파라미터 지우는 코드
+  history.replaceState({}, null, location.pathname);
+</script>
 <h2>게시판 - 보기</h2>
   <table>
     <tr>

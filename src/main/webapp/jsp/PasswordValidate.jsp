@@ -12,6 +12,10 @@
   <title>비밀번호 확인</title>
 </head>
 <body>
+<script type="text/javascript">
+  // url 파라미터 지우는 코드
+  history.replaceState({}, null, location.pathname);
+</script>
 <table>
   <form action="board?cmd=delete&boardId=${boardId}" method="post">
   <tr class="password">

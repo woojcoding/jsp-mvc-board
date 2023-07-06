@@ -11,7 +11,10 @@
   <title>게시판 수정</title>
 </head>
 <body>
+
   <script>
+    history.replaceState({}, null, location.pathname);
+
     function validateForm() {
       var writer = document.forms["myForm"]["writer"].value;
 

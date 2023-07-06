@@ -33,13 +33,13 @@ public class BoardListHandler implements CommandHandler{
         int endRow = currentPage * pageSize;
 
         // 검색 조건
-        String startDate = request.getParameter("startDate");
+        String startDate = request.getParameter("searchStartDate");
 
-        String endDate = request.getParameter("endDate");
+        String endDate = request.getParameter("searchEndDate");
 
-        String categoryId = request.getParameter("category");
-
-        String keyword = request.getParameter("keyword");
+        String categoryId = request.getParameter("searchCategory");
+        
+        String keyword = request.getParameter("searchKeyword");
 
         BoardSearchCondition boardSearchCondition =
                 new BoardSearchCondition(startDate, endDate, categoryId, keyword);
