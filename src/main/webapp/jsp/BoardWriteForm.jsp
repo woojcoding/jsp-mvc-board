@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/board-write.css" type="text/css">
     <title>게시판-등록</title>
 </head>
 <body>

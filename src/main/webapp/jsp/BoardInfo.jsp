@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-  <link rel="stylesheet" href="/css/board-info.css" type="text/css">
   <title>게시판 보기</title>
 </head>
 <body>
@@ -50,7 +49,7 @@
     <tr>
       <td class="buttons" colspan="4">
         <button onclick="location.href='board?cmd=list'">목록</button>
-        <button onclick="location.href='BoardUpdateForm.jsp?boardId='${boardBean.boardId}">수정</button>
+        <button onclick="location.href='board?cmd=modify&boardId=${boardBean.boardId}'">수정</button>
         <button onclick="location.href='PasswordValidate.jsp?boardId=${boardBean.boardId}'">삭제</button>
       </td>
     </tr>

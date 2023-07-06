@@ -2,7 +2,9 @@ package com.study.controller;
 
 import com.study.command.BoardInfoHandler;
 import com.study.command.BoardListHandler;
+import com.study.command.BoardModifyHandler;
 import com.study.command.BoardPostHandler;
+import com.study.command.BoardUpdateHandler;
 import com.study.command.BoardWriteHandler;
 import com.study.command.CommandHandler;
 
@@ -52,6 +54,10 @@ public class BoardController extends HttpServlet {
             handler = new BoardWriteHandler();
         } else if (command.equals("post")) {
             handler = new BoardPostHandler();
+        } else if (command.equals("modify")) {
+            handler = new BoardModifyHandler();
+        } else if (command.equals("update")) {
+            handler = new BoardUpdateHandler();
         }
 
         if (handler == null) {
