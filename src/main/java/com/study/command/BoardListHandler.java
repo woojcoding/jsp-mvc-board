@@ -30,8 +30,6 @@ public class BoardListHandler implements CommandHandler{
 
         int startRow = (currentPage - 1) * pageSize + 1;
 
-        int endRow = currentPage * pageSize;
-
         // 검색 조건
         String startDate = request.getParameter("searchStartDate");
 
@@ -47,7 +45,7 @@ public class BoardListHandler implements CommandHandler{
         // 검색된 총 게시글 수
         int totalBoardCount = boardDao.getBoardCount(boardSearchCondition);
 
-        List<BoardBean> boardList = boardDao.getBoards(boardSearchCondition, startRow, endRow);
+        List<BoardBean> boardList = boardDao.getBoards(boardSearchCondition, startRow, pageSize);
 
         CategoryDao categoryDao = new CategoryDao();
 
