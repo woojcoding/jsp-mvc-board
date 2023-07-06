@@ -3,7 +3,7 @@ package com.study.command;
 import com.study.model.BoardBean;
 import com.study.service.CategoryDao;
 import com.study.model.CommentBean;
-import com.study.model.CommentDao;
+import com.study.service.CommentDao;
 import com.study.service.BoardDao;
 
 import javax.servlet.http.HttpServletRequest;

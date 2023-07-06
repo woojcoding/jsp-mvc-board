@@ -2,6 +2,8 @@ package com.study.controller;
 
 import com.study.command.BoardInfoHandler;
 import com.study.command.BoardListHandler;
+import com.study.command.BoardPostHandler;
+import com.study.command.BoardWriteHandler;
 import com.study.command.CommandHandler;
 
 import javax.servlet.RequestDispatcher;
@@ -36,6 +38,8 @@ public class BoardController extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        request.setCharacterEncoding("utf-8");
+
         String command = request.getParameter("cmd");
 
         CommandHandler handler = null;
@@ -44,6 +48,10 @@ public class BoardController extends HttpServlet {
             handler = new BoardListHandler();
         } else if (command.equals("get")) {
             handler = new BoardInfoHandler();
+        } else if (command.equals("write")) {
+            handler = new BoardWriteHandler();
+        } else if (command.equals("post")) {
+            handler = new BoardPostHandler();
         }
 
         if (handler == null) {
@@ -52,9 +60,14 @@ public class BoardController extends HttpServlet {
 
         String viewPage = handler.process(request, response);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+        if (viewPage.startsWith("/board?cmd=")) {
+            response.sendRedirect(viewPage);
 
-        dispatcher.forward(request, response);
+        } else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+
+            dispatcher.forward(request, response);
+        }
     }
 }
 

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -241,15 +242,18 @@ public class BoardDao {
      * 게시글을 작성하여 db에 반영하는 메서드
      *
      * @param boardBean the board bean
+     * @return generatedBoardId 생성된 게시글Id 반환
      */
-    public void insertBoard(BoardBean boardBean) throws Exception {
+    public Long insertBoard(BoardBean boardBean) throws Exception {
         connection = ConnectionUtil.getConnection();
+
+        Long generatedBoardId = 0L;
 
         try {
             String query = "INSERT INTO board (writer, password, title, content, isAttached, views, createdAt, modifiedAt, categoryId) " +
                     "VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, NULL, ?)";
 
-            pstmt = connection.prepareStatement(query);
+            pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, boardBean.getWriter());
             pstmt.setString(2, boardBean.getPassword());
             pstmt.setString(3, boardBean.getTitle());
@@ -259,7 +263,11 @@ public class BoardDao {
             pstmt.setLong(7, boardBean.getCategoryId());
             pstmt.executeUpdate();
 
-            connection.close();
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                generatedBoardId = rs.getLong(1);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -278,6 +286,7 @@ public class BoardDao {
                 e.printStackTrace();
             }
         }
+        return generatedBoardId;
     }
 
     /**

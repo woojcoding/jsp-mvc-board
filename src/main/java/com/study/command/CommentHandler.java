@@ -1,14 +1,10 @@
 package com.study.command;
 
-import com.study.model.BoardBean;
 import com.study.model.CommentBean;
-import com.study.model.CommentDao;
-import com.study.service.BoardDao;
-import com.study.service.CategoryDao;
+import com.study.service.CommentDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 public class CommentHandler implements CommandHandler{
     @Override
@@ -28,10 +24,6 @@ public class CommentHandler implements CommandHandler{
         commentDao.insertComment(commentBean);
 
         // 2. 뷰 페이지의 URI 리턴
-        String redirectUri = "/board?cmd=get&boardId=" + boardId;
-
-        response.sendRedirect(redirectUri);
-
-        return null;
+        return "/board?cmd=get&boardId=" + boardId;
     }
 }

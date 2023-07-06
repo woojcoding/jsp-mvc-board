@@ -86,7 +86,7 @@
         </c:forEach>
         <a href="board?cmd=list&pageNum=${endPage.intValue()}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&category=${categoryId != null ? categoryId : ''}&keyword=${keyword != null ? keyword : ''}">>></a>
     </c:if>
-    <button id="post" onclick="location.href='BoardWriteForm.jsp'">등록</button>
+    <button id="post" onclick="location.href='board?cmd=write'">등록</button>
 </p>
 </body>
 </html>
