@@ -9,12 +9,12 @@
 <h2>게시판 - 보기</h2>
   <table>
     <tr>
-      <td>${categoryName}</td>
+      <td>${boardBean.writer}</td>
       <td class="rightAlign">등록일시 ${boardBean.createdAt}</td>
       <td class="rightAlign">수정일시${boardBean.modifiedAt != null ? boardBean.modifiedAt : '-'}</td>
     </tr>
     <tr class="title">
-      <td colspan="3">[${boardBean.categoryId}] ${boardBean.title}</td>
+      <td colspan="3">[${categoryName}] ${boardBean.title}</td>
       <td class="rightAlign">조회수: ${boardBean.views}</td>
     </tr>
     <tr class="content-row">
