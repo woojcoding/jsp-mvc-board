@@ -460,12 +460,6 @@ public class BoardDao {
         connection = ConnectionUtil.getConnection();
 
         try {
-            boolean updateViews = false;
-
-            BoardBean boardBean = getOneBoard(boardId, updateViews);
-
-            String originPassword = boardBean.getPassword();
-
             String query = "DELETE FROM board WHERE boardId = ?";
 
             pstmt = connection.prepareStatement(query);

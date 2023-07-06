@@ -26,13 +26,7 @@
         alert("작성자는 3글자 이상, 5글자 미만으로 입력해주세요.");
         return false;
       }
-
-      // 비밀번호 검증
-      if (password !== "${boardBean.password}") {
-        alert("올바른 비밀번호를 입력해주세요.");
-        return false;
-      }
-
+      
       // 제목 필수, 글자 수 검증
       if (title.length < 4 || title.length >= 100) {
         alert("제목은 4글자 이상, 100글자 미만으로 입력해주세요.");

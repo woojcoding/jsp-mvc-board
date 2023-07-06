@@ -1,8 +1,10 @@
 package com.study.controller;
 
+import com.study.command.BoardDeleteHandler;
 import com.study.command.BoardInfoHandler;
 import com.study.command.BoardListHandler;
 import com.study.command.BoardModifyHandler;
+import com.study.command.BoardPasswordValidateHandler;
 import com.study.command.BoardPostHandler;
 import com.study.command.BoardUpdateHandler;
 import com.study.command.BoardWriteHandler;
@@ -58,6 +60,10 @@ public class BoardController extends HttpServlet {
             handler = new BoardModifyHandler();
         } else if (command.equals("update")) {
             handler = new BoardUpdateHandler();
+        } else if (command.equals("validate")) {
+            handler = new BoardPasswordValidateHandler();
+        } else if (command.equals("delete")) {
+            handler = new BoardDeleteHandler();
         }
 
         if (handler == null) {
