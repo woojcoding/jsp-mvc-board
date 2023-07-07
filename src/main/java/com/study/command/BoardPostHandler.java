@@ -78,7 +78,9 @@ public class BoardPostHandler implements CommandHandler {
         // 파일 업로드
         Collection<Part> parts = request.getParts();
 
-        uploadFiles(parts, boardId);
+        String realPath = request.getServletContext().getRealPath("/upload");
+
+        uploadFiles(realPath, parts, boardId);
 
         return "/board?cmd=get&boardId=" + boardId;
     }

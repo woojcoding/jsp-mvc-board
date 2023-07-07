@@ -61,7 +61,7 @@ public class FileDao {
 
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 FileBean fileBean = new FileBean();
 
                 fileBean.setOriginalName(rs.getString("originalName"));

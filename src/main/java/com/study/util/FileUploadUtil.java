@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.util.Collection;
 
 public class FileUploadUtil {
-    public static void uploadFiles(Collection<Part> parts, long boardId) throws IOException {
+    public static void uploadFiles(String realPath,
+                                   Collection<Part> parts,
+                                   long boardId) throws IOException {
         for (Part part : parts) {
             if (!part.getName().equals("file")) {
                 continue;
@@ -23,8 +25,6 @@ public class FileUploadUtil {
             }
 
             String fileOriginalName = part.getSubmittedFileName();
-
-            String realPath = "C:\\Users\\82103\\Downloads\\jsp-board-mvc\\src\\main\\webapp\\WEB-INF\\uploads";
 
             File path = new File(realPath);
 

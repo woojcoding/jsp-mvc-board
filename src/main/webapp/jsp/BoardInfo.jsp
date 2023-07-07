@@ -24,17 +24,15 @@
     <tr class="content-row">
       <td colspan="4" class="content">${boardBean.content}</td>
     </tr>
-    <tr>
-      <td colspan="4">
-        첨부파일
-        <br>
-        첨부파일
-        <br>
-        첨부파일
-        <br>
-      </td>
-    </tr>
-
+    <c:forEach var="fileBean" items="${fileList}">
+      <tr>
+        <td colspan="4">
+          <a download href="/upload/${fileBean.savedName}">
+              ${fileBean.originalName}
+          </a>
+        </td>
+      </tr>
+    </c:forEach>
     <c:forEach var="commentBean" items="${commentList}">
       <tr class="comment">
         <td colspan="4">
