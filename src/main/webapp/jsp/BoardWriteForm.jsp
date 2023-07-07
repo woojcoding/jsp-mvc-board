@@ -67,7 +67,7 @@
 </script>
     <h2>게시판 - 등록</h2>
 
-    <form name="myForm" action="board?cmd=post" method="post" onsubmit="return validateForm()">
+    <form name="myForm" action="board?cmd=post" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
     <table>
         <tr>
             <th>카테고리</th>
@@ -100,11 +100,11 @@
         <tr>
             <th>파일첨부</th>
             <td>
-                <input type="file" name="file1">
+                <input type="file" name="file">
                 <br>
-                <input type="file" name="file2">
+                <input type="file" name="file">
                 <br>
-                <input type="file" name="file3">
+                <input type="file" name="file">
             </td>
         </tr>
         <tr>

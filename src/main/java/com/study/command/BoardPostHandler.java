@@ -5,6 +5,10 @@ import com.study.service.BoardDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.util.Collection;
+
+import static com.study.util.FileUploadUtil.uploadFiles;
 
 public class BoardPostHandler implements CommandHandler {
     @Override
@@ -71,6 +75,11 @@ public class BoardPostHandler implements CommandHandler {
         boardBean.setAttached(false);
 
         long boardId = boardDao.insertBoard(boardBean);
+    
+        // 파일 업로드
+        Collection<Part> parts = request.getParts();
+
+        uploadFiles(parts);
 
         return "/board?cmd=get&boardId=" + boardId;
     }
