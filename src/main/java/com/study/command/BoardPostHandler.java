@@ -78,7 +78,7 @@ public class BoardPostHandler implements CommandHandler {
         // 파일 업로드
         Collection<Part> parts = request.getParts();
 
-        uploadFiles(parts);
+        uploadFiles(parts, boardId);
 
         return "/board?cmd=get&boardId=" + boardId;
     }

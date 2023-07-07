@@ -3,8 +3,10 @@ package com.study.command;
 import com.study.model.BoardBean;
 import com.study.model.BoardSearchCondition;
 import com.study.model.CategoryBean;
-import com.study.service.CategoryDao;
 import com.study.service.BoardDao;
+import com.study.service.CategoryDao;
+import com.study.service.FileDao;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -65,6 +67,7 @@ public class BoardListHandler implements CommandHandler{
         request.setAttribute("totalBoardCount", totalBoardCount);
         request.setAttribute("categoryList", categoryList);
         request.setAttribute("categoryMap", categoryMap);
+        request.setAttribute("fileDao", new FileDao());
 
         // 3. 뷰 페이지의 URI 리턴
         return "/jsp/BoardList.jsp";

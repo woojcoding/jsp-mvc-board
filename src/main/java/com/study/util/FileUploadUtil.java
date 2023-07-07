@@ -1,5 +1,7 @@
 package com.study.util;
 
+import com.study.model.FileBean;
+import com.study.service.FileDao;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.http.Part;
@@ -10,7 +12,7 @@ import java.io.InputStream;
 import java.util.Collection;
 
 public class FileUploadUtil {
-    public static void uploadFiles(Collection<Part> parts) throws IOException {
+    public static void uploadFiles(Collection<Part> parts, long boardId) throws IOException {
         for (Part part : parts) {
             if (!part.getName().equals("file")) {
                 continue;
@@ -20,7 +22,7 @@ public class FileUploadUtil {
                 continue;
             }
 
-            String fileName = part.getSubmittedFileName();
+            String fileOriginalName = part.getSubmittedFileName();
 
             String realPath = "C:\\Users\\82103\\Downloads\\jsp-board-mvc\\src\\main\\webapp\\WEB-INF\\uploads";
 
@@ -30,23 +32,23 @@ public class FileUploadUtil {
                 path.mkdirs();
             }
 
-            String filePath = realPath + File.separator + fileName;
+            String filePath = realPath + File.separator + fileOriginalName;
 
             File file = new File(filePath);
 
             // 중복 파일명 처리
             int count = 1;
 
-            String baseName = FilenameUtils.getBaseName(fileName);
+            String baseName = FilenameUtils.getBaseName(fileOriginalName);
 
-            String extension = FilenameUtils.getExtension(fileName);
+            String extension = FilenameUtils.getExtension(fileOriginalName);
 
-            String newFileName = fileName;
+            String savedFileName = fileOriginalName;
 
             while (file.exists()) {
-                newFileName = baseName + "_" + count + "." + extension;
+                savedFileName = baseName + "_" + count + "." + extension;
 
-                filePath = realPath + File.separator + newFileName;
+                filePath = realPath + File.separator + savedFileName;
 
                 file = new File(filePath);
 
@@ -63,6 +65,18 @@ public class FileUploadUtil {
                 while ((size = filePartInputStream.read(buf)) != -1) {
                     fileOutputStream.write(buf, 0, size);
                 }
+
+                FileBean fileBean = new FileBean();
+
+                fileBean.setBoardId(boardId);
+                fileBean.setOriginalName(fileOriginalName);
+                fileBean.setSavedName(savedFileName);
+
+                FileDao fileDao = new FileDao();
+
+                fileDao.saveFile(fileBean);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }

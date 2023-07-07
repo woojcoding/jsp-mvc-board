@@ -56,7 +56,17 @@
     <c:forEach var="board" items="${boardList}">
         <tr>
             <td>${categoryMap[board.categoryId]}</td>
-            <td>x</td>
+            <td>
+            <c:set var="fileList" value="${fileDao.getFiles(board.boardId)}" />
+            <c:choose>
+                <c:when test="${fileList != null && fileList.size() > 0}">
+                    O
+                </c:when>
+                <c:otherwise>
+                    X
+                </c:otherwise>
+            </c:choose>
+        </td>
             <td><a href="board?cmd=get&boardId=${board.boardId}" style="text-decoration:none;">${board.title}</a></td>
             <td>${board.writer}</td>
             <td>${board.views}</td>
