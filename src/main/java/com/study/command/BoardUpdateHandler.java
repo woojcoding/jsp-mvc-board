@@ -29,7 +29,6 @@ public class BoardUpdateHandler implements CommandHandler {
         boardBean.setPassword(password);
         boardBean.setTitle(title);
         boardBean.setContent(content);
-        boardBean.setAttached(false);
 
         boolean validatePassword = boardDao.validatePassword(boardBean);
 

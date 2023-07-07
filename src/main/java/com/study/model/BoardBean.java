@@ -13,8 +13,6 @@ public class BoardBean {
 
     private String content;
 
-    private boolean isAttached;
-
     private String views;
 
     private String createdAt;
@@ -67,14 +65,6 @@ public class BoardBean {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public boolean isAttached() {
-        return isAttached;
-    }
-
-    public void setAttached(boolean attached) {
-        isAttached = attached;
     }
 
     public String getViews() {

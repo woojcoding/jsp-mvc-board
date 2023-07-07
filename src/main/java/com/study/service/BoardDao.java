@@ -66,12 +66,11 @@ public class BoardDao {
                 boardBean.setPassword(rs.getString("password"));
                 boardBean.setTitle(rs.getString("title"));
                 boardBean.setContent(rs.getString("content"));
-                boardBean.setAttached(rs.getBoolean("isAttached"));
                 boardBean.setViews(rs.getString("views"));
                 boardBean.setCreatedAt(dateFormat.format(rs.getTimestamp("createdAt")));
                 boardBean.setCategoryId(rs.getLong("categoryId"));
 
-                Timestamp modifiedTimestamp = rs.getTimestamp(9);
+                Timestamp modifiedTimestamp = rs.getTimestamp("modifiedAt");
 
                 if (modifiedTimestamp != null) {
                     boardBean.setModifiedAt(dateFormat.format(modifiedTimestamp));
@@ -250,17 +249,16 @@ public class BoardDao {
         Long generatedBoardId = 0L;
 
         try {
-            String query = "INSERT INTO board (writer, password, title, content, isAttached, views, createdAt, modifiedAt, categoryId) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, NULL, ?)";
+            String query = "INSERT INTO board (writer, password, title, content, views, createdAt, modifiedAt, categoryId) " +
+                    "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, NULL, ?)";
 
             pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, boardBean.getWriter());
             pstmt.setString(2, boardBean.getPassword());
             pstmt.setString(3, boardBean.getTitle());
             pstmt.setString(4, boardBean.getContent());
-            pstmt.setBoolean(5, boardBean.isAttached());
-            pstmt.setInt(6, 0);
-            pstmt.setLong(7, boardBean.getCategoryId());
+            pstmt.setInt(5, 0);
+            pstmt.setLong(6, boardBean.getCategoryId());
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -329,12 +327,11 @@ public class BoardDao {
                 boardBean.setPassword(rs.getString("password"));
                 boardBean.setTitle(rs.getString("title"));
                 boardBean.setContent(rs.getString("content"));
-                boardBean.setAttached(rs.getBoolean("isAttached"));
                 boardBean.setViews(rs.getString("views"));
                 boardBean.setCreatedAt(dateFormat.format(rs.getTimestamp("createdAt")));
                 boardBean.setCategoryId(rs.getLong("categoryId"));
 
-                Timestamp modifiedTimestamp = rs.getTimestamp(9);
+                Timestamp modifiedTimestamp = rs.getTimestamp("modifiedAt");
 
                 if (modifiedTimestamp != null) {
                     boardBean.setModifiedAt(dateFormat.format(modifiedTimestamp));

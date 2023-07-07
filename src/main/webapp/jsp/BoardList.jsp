@@ -56,7 +56,7 @@
     <c:forEach var="board" items="${boardList}">
         <tr>
             <td>${categoryMap[board.categoryId]}</td>
-            <td>${board.attached ? 'O' : ''}</td>
+            <td>x</td>
             <td><a href="board?cmd=get&boardId=${board.boardId}" style="text-decoration:none;">${board.title}</a></td>
             <td>${board.writer}</td>
             <td>${board.views}</td>

@@ -72,7 +72,6 @@ public class BoardPostHandler implements CommandHandler {
         boardBean.setPassword(password);
         boardBean.setTitle(title);
         boardBean.setContent(content);
-        boardBean.setAttached(false);
 
         long boardId = boardDao.insertBoard(boardBean);
     
