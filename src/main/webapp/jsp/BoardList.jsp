@@ -19,12 +19,8 @@
     history.replaceState({}, null, location.pathname);
 </script>
 <h1>자유게시판 - 목록</h1>
-<form action="board" method="post">
+<form action="board?cmd=list&startDate=${startdate}&endDate=${endDate}&category=${categoryId}&keyword=${keyword}" method="get">
     <input type="hidden" name="cmd" value="list">
-    <input type="hidden" name="searchStartDate" value="${startdate}">
-    <input type="hidden" name="searchEndDate" value="${endDate}">
-    <input type="hidden" name="searchCategory" value="${categoryId}">
-    <input type="hidden" name="searchKeyword" value="${keyword}">
     <table class="search">
         <tr>
             <td>등록일</td>

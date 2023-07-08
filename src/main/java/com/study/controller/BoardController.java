@@ -80,7 +80,6 @@ public class BoardController extends HttpServlet {
 
         if (viewPage.startsWith("/board?cmd=")) {
             response.sendRedirect(viewPage);
-
         } else {
             RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 

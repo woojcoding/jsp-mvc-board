@@ -26,12 +26,12 @@ public class BoardDao {
      *
      * @param boardSearchCondition 검색 조건
      * @param startRow   페이지 시작 번호
-     * @param endRow     페이지 끝 번호
+     * @param pageSize     페이지 끝 번호
      * @return List<BoardBean> boards
      */
     public List<BoardBean> getBoards(BoardSearchCondition boardSearchCondition,
                                      int startRow,
-                                     int endRow
+                                     int pageSize
     ) throws Exception {
         List<BoardBean> list = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class BoardDao {
             int index = setPreparedStatementConditions(boardSearchCondition);
 
             pstmt.setInt(index++, startRow - 1);
-            pstmt.setInt(index, endRow);
+            pstmt.setInt(index, pageSize);
 
             rs = pstmt.executeQuery();
 
