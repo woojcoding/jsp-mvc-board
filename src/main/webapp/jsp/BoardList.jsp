@@ -14,26 +14,26 @@
     <title>게시글 보기</title>
 </head>
 <body>
-<script type="text/javascript">
-    // url 파라미터 지우는 코드
-    history.replaceState({}, null, location.pathname);
-</script>
+<%--<script type="text/javascript">--%>
+<%--    // url 파라미터 지우는 코드--%>
+<%--    history.replaceState({}, null, location.pathname);--%>
+<%--</script>--%>
 <h1>자유게시판 - 목록</h1>
-<form action="board?cmd=list&startDate=${startdate}&endDate=${endDate}&category=${categoryId}&keyword=${keyword}" method="get">
+<form action="board" method="get">
     <input type="hidden" name="cmd" value="list">
     <table class="search">
         <tr>
             <td>등록일</td>
-            <td><input type="date" name="startDate" value="yyyy-mm-dd"> ~ <input type="date" name="endDate" value="yyyy-mm-dd"></td>
+            <td><input type="date" name="startDate" value="${param.startDate}"> ~ <input type="date" name="endDate" value="${param.endDate}"></td>
             <td>
                 <select name="category">
                     <option value="ALL">전체 카테고리</option>
                     <c:forEach var="category" items="${categoryList}">
-                        <option value="${category.categoryId}" name="categoryId">${category.name}</option>
+                        <option value="${category.categoryId}" ${category.categoryId eq (param.category? param.category : '') ? 'selected' : ''}>${category.name}</option>
                     </c:forEach>
                 </select>
             </td>
-            <td> <input type="text" id="searchBox" name="keyword" placeholder="검색어를 입력해 주세요.(제목 + 작성자 + 내용)"></td>
+            <td> <input type="text" id="searchBox" name="keyword" placeholder="검색어를 입력해 주세요.(제목 + 작성자 + 내용)" value="${param.keyword}"></td>
             <td><button type="submit">검색</button></td>
         </tr>
     </table>
@@ -74,31 +74,25 @@
 <p id="paging">
     <c:if test="${totalBoardCount > 0}">
         <c:set var="pageCount" value="${totalBoardCount / pageSize + (totalBoardCount % pageSize == 0 ? 0 : 1)}" />
-        <c:set var="startPage" value="1"/>
+        <c:set var="startPage" value="1" />
 
-        <c:if test="${currentPage % 10 != 0}">
-            <fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true"/>
-            <c:set var="startPage" value="${result * 10 + 1}"/>
-        </c:if>
-        <c:if test="${currentPage % 10 == 0}">
-            <c:set var="startPage" value="${(result - 1) * 10 + 1}"/>
+        <c:if test="${currentPage > 10}">
+            <c:set var="startPage" value="${currentPage - ((currentPage - 1) % 10)}" />
         </c:if>
 
-        <c:set var="pageBlock" value="10" />
-        <c:set var="endPage" value="${startPage + pageBlock - 1}" /> 
-
+        <c:set var="endPage" value="${startPage + 9}" />
         <c:if test="${endPage > pageCount}">
             <c:set var="endPage" value="${pageCount}" />
         </c:if>
 
-        <a href="board?cmd=list&pageNum=1&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&category=${categoryId != null ? categoryId : ''}&keyword=${keyword != null ? keyword : ''}"><<</a>
+        <a href="board?cmd=list&pageNum=1&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}"><<</a>
         <c:if test="${startPage > 10}">
-            <a href="board?cmd=list&pageNum=${startPage - 10}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&category=${categoryId != null ? categoryId : ''}&keyword=${keyword != null ? keyword : ''}"><</a>
+            <a href="board?cmd=list&pageNum=${startPage - 10}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}"><</a>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
-            <a href="board?cmd=list&pageNum=${i}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&category=${categoryId != null ? categoryId : ''}&keyword=${keyword != null ? keyword : ''}">${i}</a>
+            <a href="board?cmd=list&pageNum=${i}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}">${i}</a>
         </c:forEach>
-        <a href="board?cmd=list&pageNum=${endPage.intValue()}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&category=${categoryId != null ? categoryId : ''}&keyword=${keyword != null ? keyword : ''}">>></a>
+        <a href="board?cmd=list&pageNum=${endPage.intValue()}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}">>></a>
     </c:if>
     <button id="post" onclick="location.href='board?cmd=write'">등록</button>
 </p>
