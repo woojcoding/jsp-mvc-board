@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 게시글 목록을 처리하는 핸들러입니다.
+ */
 public class BoardListHandler implements CommandHandler{
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 1. 명령어와 관련된 비즈니스 로직 처리

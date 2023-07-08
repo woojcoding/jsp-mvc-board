@@ -3,6 +3,9 @@ package com.study.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 패스워드를 검증 처리하는 핸들러입니다
+ */
 public class BoardPasswordValidateHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

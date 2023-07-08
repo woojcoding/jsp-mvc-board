@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type File dao.
+ */
 public class FileDao {
     private Connection connection;
 
@@ -17,6 +20,12 @@ public class FileDao {
 
     private ResultSet rs;
 
+    /**
+     * Save file.
+     *
+     * @param fileBean the file bean
+     * @throws Exception the exception
+     */
     public void saveFile(FileBean fileBean) throws Exception {
         connection = ConnectionUtil.getConnection();
 
@@ -48,6 +57,13 @@ public class FileDao {
         }
     }
 
+    /**
+     * Gets files.
+     *
+     * @param boardId the board id
+     * @return the files
+     * @throws Exception the exception
+     */
     public List<FileBean> getFiles(long boardId) throws Exception {
         List<FileBean> fileList = new ArrayList<>();
 
@@ -89,5 +105,40 @@ public class FileDao {
         }
 
         return fileList;
+    }
+
+    /**
+     * Delete file.
+     *
+     * @param fileId the file id
+     * @throws Exception the exception
+     */
+    public void deleteFile(long fileId) throws Exception {
+        connection = ConnectionUtil.getConnection();
+
+        try {
+            String query = "UPDATE file SET isDeleted = true WHERE fileId= ?";
+
+            pstmt = connection.prepareStatement(query);
+            pstmt.setLong(1, fileId);
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

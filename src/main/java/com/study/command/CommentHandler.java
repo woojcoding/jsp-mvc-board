@@ -6,6 +6,9 @@ import com.study.service.CommentDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 댓글을 작성하는 핸들러입니다.
+ */
 public class CommentHandler implements CommandHandler{
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -10,6 +10,9 @@ import java.util.Collection;
 
 import static com.study.util.FileUploadUtil.uploadFiles;
 
+/**
+ * 게시글을 포스트하는 핸들러입니다.
+ */
 public class BoardPostHandler implements CommandHandler {
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
