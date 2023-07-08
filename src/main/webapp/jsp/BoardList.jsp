@@ -18,22 +18,46 @@
 <%--    // url 파라미터 지우는 코드--%>
 <%--    history.replaceState({}, null, location.pathname);--%>
 <%--</script>--%>
+<script type="text/javascript">
+    function saveFormDataToCookie() {
+        var startDate = document.getElementById("startDate").value;
+
+        var endDate = document.getElementById("endDate").value;
+
+        var categoryId = document.getElementById("categoryId").value;
+
+        var keyword = document.getElementById("keyword").value;
+
+        // 쿠키에 저장
+        document.cookie = "startDate=" + startDate + "; path=/";
+
+        document.cookie = "endDate=" + endDate + "; path=/";
+
+        document.cookie = "categoryId=" + categoryId + "; path=/";
+
+        document.cookie = "keyword=" + keyword + "; path=/";
+    }
+
+    function savePageNumToCookie(pageNum) {
+        document.cookie = "pageNum=" + pageNum + "; path=/";
+    }
+</script>
 <h1>자유게시판 - 목록</h1>
-<form action="board" method="get">
+<form action="board" method="get" onsubmit="saveFormDataToCookie()">
     <input type="hidden" name="cmd" value="list">
     <table class="search">
         <tr>
             <td>등록일</td>
-            <td><input type="date" name="startDate" value="${param.startDate}"> ~ <input type="date" name="endDate" value="${param.endDate}"></td>
+            <td><input type="date" id="startDate" name="startDate" value="${param.startDate}"> ~ <input type="date" id="endDate" name="endDate" value="${param.endDate}"></td>
             <td>
-                <select name="category">
+                <select id="categoryId" name="categoryId">
                     <option value="ALL">전체 카테고리</option>
                     <c:forEach var="category" items="${categoryList}">
-                        <option value="${category.categoryId}" ${category.categoryId eq (param.category? param.category : '') ? 'selected' : ''}>${category.name}</option>
+                        <option value="${category.categoryId}" name="categoryId">${category.name}</option>
                     </c:forEach>
                 </select>
             </td>
-            <td> <input type="text" id="searchBox" name="keyword" placeholder="검색어를 입력해 주세요.(제목 + 작성자 + 내용)" value="${param.keyword}"></td>
+            <td> <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해 주세요.(제목 + 작성자 + 내용)" value="${param.keyword}"></td>
             <td><button type="submit">검색</button></td>
         </tr>
     </table>
@@ -85,14 +109,14 @@
             <c:set var="endPage" value="${pageCount}" />
         </c:if>
 
-        <a href="board?cmd=list&pageNum=1&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}"><<</a>
+        <a href="board?cmd=list&pageNum=1&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}" onclick="savePageNumToCookie(1)"><<</a>
         <c:if test="${startPage > 10}">
-            <a href="board?cmd=list&pageNum=${startPage - 10}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}"><</a>
+            <a href="board?cmd=list&pageNum=${startPage - 10}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}" onclick="savePageNumToCookie(${startPage - 10})"><</a>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
-            <a href="board?cmd=list&pageNum=${i}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}">${i}</a>
+            <a href="board?cmd=list&pageNum=${i}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}" onclick="savePageNumToCookie(${i})">${i}</a>
         </c:forEach>
-        <a href="board?cmd=list&pageNum=${endPage.intValue()}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}">>></a>
+        <a href="board?cmd=list&pageNum=${endPage.intValue()}&startDate=${param.startDate}&endDate=${param.endDate}&category=${param.category}&keyword=${param.keyword}" onclick="savePageNumToCookie(${endPage.intValue()})">>></a>
     </c:if>
     <button id="post" onclick="location.href='board?cmd=write'">등록</button>
 </p>

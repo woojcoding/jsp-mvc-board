@@ -9,6 +9,18 @@
 <script type="text/javascript">
   // url 파라미터 지우는 코드
   history.replaceState({}, null, location.pathname);
+
+  // 쿠키에서 값을 가져오는 함수
+  function getCookie(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+
+    if (parts.length === 2) {
+      var cookieValue = parts.pop().split(';').shift();
+      return decodeURIComponent(cookieValue);
+    }
+    return null;
+  }
 </script>
 <h2>게시판 - 보기</h2>
   <table>
@@ -50,7 +62,14 @@
     </form>
     <tr>
       <td class="buttons" colspan="4">
-        <button onclick="location.href='board?cmd=list'">목록</button>
+        <button onclick="location.href='board' +
+        '?cmd=list' +
+        '&pageNum=' + (getCookie('pageNum') || '') +
+        '&startDate=' + (getCookie('startDate') || '') +
+        '&endDate=' + (getCookie('endDate') || '') +
+        '&categoryId=' + (getCookie('categoryId') || '') +
+        '&keyword=' + (getCookie('keyword') || '')">목록
+        </button>
         <button onclick="location.href='board?cmd=modify&boardId=${boardBean.boardId}'">수정</button>
         <button onclick="location.href='board?cmd=validate&boardId=${boardBean.boardId}'">삭제</button>
       </td>

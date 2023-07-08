@@ -3,6 +3,7 @@ package com.study.controller;
 import com.study.command.CommandHandler;
 import com.study.command.CommentHandler;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +49,14 @@ public class commentController extends HttpServlet {
             throw new IllegalArgumentException("Invalid command: " + command);
         }
 
-        handler.process(request, response);
+        String viewPage = handler.process(request, response);
+
+        if (viewPage.startsWith("/board?cmd=")) {
+            response.sendRedirect(viewPage);
+        } else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+
+            dispatcher.forward(request, response);
+        }
     }
 }
